@@ -6,17 +6,23 @@
   <title>Il Mio Portfolio</title>
   <style>
     :root {
-      --bg-color: #f4f4f4;
-      --text-color: #333;
-      --card-bg: #fff;
-      --link-color: #0066cc;
+      --bg-color: #f0f0f5;
+      --text-color: #222;
+      --card-bg: #ffffff;
+      --link-color: #007bff;
+      --accent: #6c63ff;
     }
 
     body.dark {
-      --bg-color: #121212;
-      --text-color: #eee;
-      --card-bg: #1e1e1e;
-      --link-color: #4ea0f5;
+      --bg-color: #1a1a1a;
+      --text-color: #eaeaea;
+      --card-bg: #2a2a2a;
+      --link-color: #7db4ff;
+      --accent: #9f8fff;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -24,20 +30,19 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.4s ease, color 0.4s ease;
       opacity: 0;
-      transition: opacity 0.6s ease-in;
-    }
-    
-    body.loaded {
-    opacity: 1;
+      animation: fadeIn 1s ease forwards;
     }
 
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
 
     header {
-      background-color: #282c34;
+      background: linear-gradient(135deg, var(--accent), var(--link-color));
       color: white;
-      padding: 2rem;
+      padding: 2.5rem 1rem;
       text-align: center;
       position: relative;
     }
@@ -46,116 +51,143 @@
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: #444;
-      color: #fff;
+      background: rgba(0,0,0,0.4);
+      color: white;
       border: none;
       border-radius: 20px;
       padding: 0.4rem 1rem;
       cursor: pointer;
       font-size: 0.9rem;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
 
     .toggle-dark:hover {
-      background: #666;
+      background: rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin: 0;
     }
 
     .container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
     }
 
     .project {
       background: var(--card-bg);
-      border-radius: 10px;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      transition: transform 0.2s, background 0.3s;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transform: translateY(40px);
+      opacity: 0;
+      animation: slideUp 0.7s ease forwards;
+    }
+
+    .project:nth-child(1) { animation-delay: 0.3s; }
+    .project:nth-child(2) { animation-delay: 0.5s; }
+    .project:nth-child(3) { animation-delay: 0.7s; }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .project:hover {
-      transform: translateY(-3px);
+      transform: scale(1.02);
+      transition: transform 0.3s ease;
     }
 
     .project-title {
-      font-size: 1.4rem;
-      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+      color: var(--accent);
     }
 
     .project-description {
-      margin: 0.5rem 0 1rem;
-      line-height: 1.5;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
     .project a {
-      color: var(--link-color);
+      display: inline-block;
+      background: var(--link-color);
+      color: white;
       text-decoration: none;
-      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
 
     .project a:hover {
-      text-decoration: underline;
+      background: var(--accent);
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1rem;
       font-size: 0.9rem;
-      color: #888;
+      color: #999;
     }
 
     @media (max-width: 600px) {
-      header {
-        padding: 1.5rem 1rem;
-      }
-
       .project {
         padding: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
       }
     }
   </style>
 </head>
-<body onload="document.body.classList.add('loaded')">
+<body>
   <header>
     <h1>Il Mio Portfolio</h1>
-    <p>Benvenuto! Qui trovi tutti i miei progetti web.</p>
+    <p>Scopri tutti i miei progetti web!</p>
     <button class="toggle-dark" onclick="toggleDarkMode()">🌓 Tema</button>
   </header>
 
   <div class="container">
     <div class="project">
-      <h2 class="project-title">Progetto 1: ToDo App</h2>
-      <p class="project-description">Una semplice app per gestire le attività quotidiane, costruita con HTML, CSS e JavaScript.</p>
+      <h2 class="project-title">ToDo App</h2>
+      <p class="project-description">App per gestire le attività quotidiane con funzionalità come aggiunta, rimozione e completamento dei task.</p>
       <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
     </div>
 
     <div class="project">
-      <h2 class="project-title">Progetto 2: Portfolio Fotografico</h2>
-      <p class="project-description">Galleria fotografica responsive con layout grid.</p>
-      <a href="https://napobulllyxiii.github.io/napobullly-ratings/" target="_blank">Visita il sito</a>
+      <h2 class="project-title">Portfolio Fotografico</h2>
+      <p class="project-description">Una galleria responsive che mette in risalto immagini e lavori fotografici.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
     </div>
 
     <div class="project">
-      <h2 class="project-title">Progetto 3: Gioco Snake</h2>
-      <p class="project-description">Il classico gioco Snake ricreato in JavaScript.</p>
+      <h2 class="project-title">Gioco Snake</h2>
+      <p class="project-description">Versione moderna del classico gioco Snake, completamente realizzato in JavaScript.</p>
       <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Gioca ora</a>
     </div>
   </div>
 
   <footer>
-    © 2025 Il Mio Portfolio – AN
+    © 2025 Il Mio Portfolio – Sviluppato con ❤️ in HTML & CSS
   </footer>
 
   <script>
-    // Dark mode toggle con salvataggio preferenza
     function toggleDarkMode() {
       document.body.classList.toggle("dark");
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     }
 
-    // Applica il tema salvato all’avvio
     if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark");
     }
