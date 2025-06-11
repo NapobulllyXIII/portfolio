@@ -25,7 +25,14 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: background 0.3s, color 0.3s;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
     }
+    
+    body.loaded {
+    opacity: 1;
+    }
+
 
     header {
       background-color: #282c34;
@@ -110,7 +117,7 @@
     }
   </style>
 </head>
-<body>
+<body onload="document.body.classList.add('loaded')">
   <header>
     <h1>Il Mio Portfolio</h1>
     <p>Benvenuto! Qui trovi tutti i miei progetti web.</p>
