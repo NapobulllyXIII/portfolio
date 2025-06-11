@@ -6,11 +6,19 @@
   <title>Il Mio Portfolio</title>
   <style>
     :root {
-      --bg: #0e0e15;
-      --text: #f5f5f5;
-      --card-bg: #1a1a24;
-      --accent: #8e44ff;
-      --glow: rgba(142, 68, 255, 0.5);
+      --bg: #f4faff;            /* chiaro: azzurro più scuro */
+      --text: #1a1a1a;
+      --card-bg: #ffffff;
+      --accent: #0077cc;        /* azzurro più scuro tema chiaro */
+      --glow: rgba(0, 119, 204, 0.4);
+    }
+
+    body.dark {
+      --bg: #0e2f44;            /* scuro: azzurro tipo Napoli */
+      --text: #f0f8ff;
+      --card-bg: #164a6e;
+      --accent: #00aaff;        /* azzurro Napoli */
+      --glow: rgba(0, 170, 255, 0.6);
     }
 
     body {
@@ -19,6 +27,7 @@
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
     }
 
     header {
@@ -27,6 +36,7 @@
       text-align: center;
       padding: 3rem 1rem 2rem;
       position: relative;
+      transition: background 0.5s;
     }
 
     header img {
@@ -34,6 +44,7 @@
       border-radius: 50%;
       margin-bottom: 1rem;
       box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      transition: box-shadow 0.5s;
     }
 
     .toggle-dark {
@@ -47,6 +58,10 @@
       padding: 0.5rem 1rem;
       cursor: pointer;
       font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .toggle-dark:hover {
+      background: rgba(0,0,0,0.5);
     }
 
     .container {
@@ -55,6 +70,7 @@
       padding: 0 1.5rem;
       display: grid;
       gap: 2.5rem;
+      transition: color 0.5s;
     }
 
     .project {
@@ -63,25 +79,29 @@
       border-image: linear-gradient(45deg, var(--accent), #4a90e2) 1;
       border-radius: 16px;
       padding: 2rem;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      transition: transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
       cursor: pointer;
       transform-style: preserve-3d;
+      color: var(--text);
     }
 
     .project:hover {
       transform: scale(1.03) rotateX(2deg) rotateY(2deg);
       box-shadow: 0 0 25px var(--glow);
+      border-color: var(--accent);
     }
 
     .project-title {
       font-size: 1.7rem;
       color: var(--accent);
+      transition: color 0.5s;
     }
 
     .project-description {
       font-size: 1.05rem;
       margin: 0.8rem 0;
+      transition: color 0.5s;
     }
 
     .project a {
@@ -113,6 +133,7 @@
       padding: 2rem;
       font-size: 0.9rem;
       color: #888;
+      transition: color 0.5s;
     }
 
     /* Modal */
@@ -170,17 +191,17 @@
     <div class="project" data-title="ToDo App" data-info="App per creare e gestire task, con possibilità di salvataggio e filtri.">
       <h2 class="project-title">📝 ToDo App</h2>
       <p class="project-description">Gestione attività giornaliere con HTML/CSS/JS.</p>
-      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita</a>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank" rel="noopener noreferrer">Visita</a>
     </div>
     <div class="project" data-title="Portfolio Fotografico" data-info="Galleria dinamica per esporre fotografie in modo ordinato e responsive.">
       <h2 class="project-title">📷 Portfolio Fotografico</h2>
       <p class="project-description">Galleria responsive per fotografie e design.</p>
-      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita</a>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank" rel="noopener noreferrer">Visita</a>
     </div>
     <div class="project" data-title="Gioco Snake" data-info="Gioco Snake in JavaScript con punteggio e livelli crescenti.">
       <h2 class="project-title">🎮 Gioco Snake</h2>
       <p class="project-description">Classico Snake con JS puro e animazioni.</p>
-      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Gioca ora</a>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank" rel="noopener noreferrer">Gioca ora</a>
     </div>
   </div>
 
@@ -200,7 +221,7 @@
   <audio id="hoverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" preload="auto"></audio>
 
   <script>
-    // Tema scuro
+    // Tema scuro toggle con salvataggio
     function toggleDarkMode() {
       document.body.classList.toggle("dark");
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
@@ -217,7 +238,10 @@
     const sound = document.getElementById('hoverSound');
 
     projects.forEach(p => {
-      p.addEventListener('mouseenter', () => sound.play());
+      p.addEventListener('mouseenter', () => {
+        sound.currentTime = 0;
+        sound.play();
+      });
       p.addEventListener('click', () => {
         modalTitle.innerText = p.dataset.title;
         modalInfo.innerText = p.dataset.info;
