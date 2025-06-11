@@ -6,117 +6,166 @@
   <title>Il Mio Portfolio</title>
   <style>
     :root {
-      --bg: #f2f2f8;
-      --text: #222;
-      --card: #fff;
-      --accent: #7c5cff;
-      --hover-glow: rgba(124, 92, 255, 0.6);
+      --bg: #0e0e15;
+      --text: #f5f5f5;
+      --card-bg: #1a1a24;
+      --accent: #8e44ff;
+      --glow: rgba(142, 68, 255, 0.5);
     }
-    body.dark {
-      --bg: #18181d;
-      --text: #eaeaea;
-      --card: #242429;
-      --hover-glow: rgba(124, 92, 255, 0.4);
-    }
-    * { box-sizing: border-box; }
     body {
-      margin:0; font-family:'Segoe UI',sans-serif;
-      background: var(--bg); color: var(--text);
-      transition:background .4s,color .4s;
-      opacity:0; animation:fadeIn 1s forwards;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
-    @keyframes fadeIn { to{opacity:1;} }
     header {
       background: linear-gradient(135deg, var(--accent), #4a90e2);
-      color: #fff; padding:2.5rem 1rem; text-align:center; position:relative;
+      color: #fff;
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      position: relative;
     }
-    .toggle-dark { position:absolute; top:1rem; right:1rem;
-      background:rgba(0,0,0,0.3); color:#fff; border:none; border-radius:20px;
-      padding:.4rem 1rem; cursor:pointer; transition:background .3s; }
-    .toggle-dark:hover { background:rgba(0,0,0,0.5); }
-    .container { max-width:900px; margin:3rem auto; padding:0 1.5rem; }
+    .toggle-dark {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .toggle-dark:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
     .project {
-      background: var(--card); border-radius:12px; padding:1.5rem;
-      margin-bottom:2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      position:relative; overflow:hidden;
-      transform: perspective(600px) rotateY(0);
-      transition:transform .6s;
+      background: var(--card-bg);
+      border: 2px solid transparent;
+      border-image: linear-gradient(45deg, var(--accent), #4a90e2) 1;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      transition: all 0.4s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
-    .project:hover { 
-      box-shadow:0 12px 25px var(--hover-glow);
-      transform: perspective(600px) rotateY(8deg); 
+
+    .project:hover {
+      transform: scale(1.03) rotateX(2deg) rotateY(2deg);
+      box-shadow: 0 0 25px var(--glow);
     }
-    .divider {
-      height:4px; width:100%; margin:3rem 0;
-      background: linear-gradient(270deg, transparent, var(--accent), transparent);
-      background-size:200% 100%;
-      animation:wave 4s ease infinite;
-    }
-    @keyframes wave {
-      0%{background-position:0 0;} 100%{background-position:-200% 0;}
-    }
+
     .project-title {
-      font-size:1.6rem; margin-bottom:.5rem; color:var(--accent);
+      font-size: 1.7rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      animation: fadeInDown 0.6s ease;
     }
-    .project-description { line-height:1.6; margin-bottom:1rem; }
+
+    .project-description {
+      line-height: 1.6;
+      font-size: 1.05rem;
+      animation: fadeInUp 0.6s ease;
+    }
+
     .project a {
-      display:inline-block; background:var(--accent); color:#fff;
-      padding:.6rem 1.2rem; border-radius:8px;
-      transition:transform .3s, background .3s;
-      animation:wiggle 2s ease-in-out infinite;
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulse 2s infinite;
     }
+
     .project a:hover {
-      background:#4a90e2; transform:scale(1.05);
+      transform: scale(1.05);
+      box-shadow: 0 0 12px var(--accent);
     }
-    @keyframes wiggle {
-      0%,100%{transform:rotate(0);} 25%{rotate(1deg);} 75%{rotate(-1deg);}
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-    footer { text-align:center; padding:2rem 1rem; font-size:.9rem; color:#999; }
-    @media(max-width:600px){
-      .project { padding:1rem; }
-      .project-title{font-size:1.4rem;}
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 var(--glow); }
+      70% { box-shadow: 0 0 0 10px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .project {
+        padding: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Il Mio Portfolio</h1>
-    <p>Scopri i miei progetti web!</p>
+    <p>Benvenuto! Scopri i miei progetti web.</p>
     <button class="toggle-dark" onclick="toggleDarkMode()">🌓 Tema</button>
   </header>
 
   <div class="container">
     <div class="project">
-      <h2 class="project-title">ToDo App</h2>
-      <p class="project-description">Gestisci attività con funzioni di aggiunta, completamento e rimozione.</p>
-      <a href="#" target="_blank">Visita il sito</a>
+      <h2 class="project-title">📝 ToDo App</h2>
+      <p class="project-description">App semplice per la gestione delle attività quotidiane con interfaccia intuitiva.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
     </div>
 
-    <div class="divider"></div>
-
     <div class="project">
-      <h2 class="project-title">Portfolio Fotografico</h2>
-      <p class="project-description">Galleria responsiva per mostrare i tuoi scatti migliori.</p>
-      <a href="#" target="_blank">Visita il sito</a>
+      <h2 class="project-title">📷 Portfolio Fotografico</h2>
+      <p class="project-description">Galleria responsive per presentare fotografie con eleganza e stile.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
     </div>
 
-    <div class="divider"></div>
-
     <div class="project">
-      <h2 class="project-title">Gioco Snake</h2>
-      <p class="project-description">Classico Snake in JavaScript: divertente e retrò!</p>
-      <a href="#" target="_blank">Gioca ora</a>
+      <h2 class="project-title">🎮 Gioco Snake</h2>
+      <p class="project-description">Versione moderna del classico Snake sviluppata in JavaScript puro.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Gioca ora</a>
     </div>
   </div>
 
-  <footer>© 2025 Il Mio Portfolio – HTML & CSS con stile</footer>
+  <footer>
+    © 2025 Il Mio Portfolio – Design moderno con passione 💜
+  </footer>
 
   <script>
-    function toggleDarkMode(){
+    function toggleDarkMode() {
       document.body.classList.toggle("dark");
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     }
-    if(localStorage.getItem("theme")==="dark"){
+    if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark");
     }
   </script>
