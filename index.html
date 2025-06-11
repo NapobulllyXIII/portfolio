@@ -12,6 +12,7 @@
       --accent: #8e44ff;
       --glow: rgba(142, 68, 255, 0.5);
     }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -19,28 +20,33 @@
       color: var(--text);
       overflow-x: hidden;
     }
+
     header {
       background: linear-gradient(135deg, var(--accent), #4a90e2);
       color: #fff;
-      padding: 3rem 1rem 2rem;
       text-align: center;
+      padding: 3rem 1rem 2rem;
       position: relative;
     }
+
+    header img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    }
+
     .toggle-dark {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.3);
       color: #fff;
       border: none;
       border-radius: 20px;
       padding: 0.5rem 1rem;
       cursor: pointer;
       font-size: 0.9rem;
-      transition: background 0.3s;
-    }
-    .toggle-dark:hover {
-      background: rgba(0,0,0,0.7);
     }
 
     .container {
@@ -58,9 +64,9 @@
       border-radius: 16px;
       padding: 2rem;
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      transition: all 0.4s ease;
+      transition: transform 0.4s, box-shadow 0.4s;
+      cursor: pointer;
       transform-style: preserve-3d;
-      perspective: 1000px;
     }
 
     .project:hover {
@@ -71,14 +77,11 @@
     .project-title {
       font-size: 1.7rem;
       color: var(--accent);
-      margin-bottom: 0.5rem;
-      animation: fadeInDown 0.6s ease;
     }
 
     .project-description {
-      line-height: 1.6;
       font-size: 1.05rem;
-      animation: fadeInUp 0.6s ease;
+      margin: 0.8rem 0;
     }
 
     .project a {
@@ -99,16 +102,6 @@
       box-shadow: 0 0 12px var(--accent);
     }
 
-    @keyframes fadeInDown {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 var(--glow); }
       70% { box-shadow: 0 0 0 10px transparent; }
@@ -122,45 +115,92 @@
       color: #888;
     }
 
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      color: #000;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      animation: fadeIn 0.4s;
+    }
+
+    .modal-close {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
     @media (max-width: 600px) {
-      .project {
-        padding: 1.2rem;
-      }
+      .project { padding: 1.2rem; }
     }
   </style>
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Logo Portfolio" />
     <h1>Il Mio Portfolio</h1>
-    <p>Benvenuto! Scopri i miei progetti web.</p>
+    <p>Esplora i miei progetti creativi</p>
     <button class="toggle-dark" onclick="toggleDarkMode()">🌓 Tema</button>
   </header>
 
   <div class="container">
-    <div class="project">
+    <div class="project" data-title="ToDo App" data-info="App per creare e gestire task, con possibilità di salvataggio e filtri.">
       <h2 class="project-title">📝 ToDo App</h2>
-      <p class="project-description">App semplice per la gestione delle attività quotidiane con interfaccia intuitiva.</p>
-      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
+      <p class="project-description">Gestione attività giornaliere con HTML/CSS/JS.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita</a>
     </div>
-
-    <div class="project">
+    <div class="project" data-title="Portfolio Fotografico" data-info="Galleria dinamica per esporre fotografie in modo ordinato e responsive.">
       <h2 class="project-title">📷 Portfolio Fotografico</h2>
-      <p class="project-description">Galleria responsive per presentare fotografie con eleganza e stile.</p>
-      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
+      <p class="project-description">Galleria responsive per fotografie e design.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita</a>
     </div>
-
-    <div class="project">
+    <div class="project" data-title="Gioco Snake" data-info="Gioco Snake in JavaScript con punteggio e livelli crescenti.">
       <h2 class="project-title">🎮 Gioco Snake</h2>
-      <p class="project-description">Versione moderna del classico Snake sviluppata in JavaScript puro.</p>
+      <p class="project-description">Classico Snake con JS puro e animazioni.</p>
       <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Gioca ora</a>
     </div>
   </div>
 
   <footer>
-    © 2025 Il Mio Portfolio – Design moderno con passione 💜
+    © 2025 Il Mio Portfolio – Con passione & fantasia 💜
   </footer>
 
+  <!-- Modal -->
+  <div class="modal" id="projectModal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalInfo"></p>
+      <button class="modal-close" onclick="closeModal()">Chiudi</button>
+    </div>
+  </div>
+
+  <audio id="hoverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" preload="auto"></audio>
+
   <script>
+    // Tema scuro
     function toggleDarkMode() {
       document.body.classList.toggle("dark");
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
@@ -168,6 +208,47 @@
     if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark");
     }
+
+    // Effetto modale
+    const projects = document.querySelectorAll('.project');
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalInfo = document.getElementById('modalInfo');
+    const sound = document.getElementById('hoverSound');
+
+    projects.forEach(p => {
+      p.addEventListener('mouseenter', () => sound.play());
+      p.addEventListener('click', () => {
+        modalTitle.innerText = p.dataset.title;
+        modalInfo.innerText = p.dataset.info;
+        modal.style.display = "flex";
+      });
+    });
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Scroll reveal semplice
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.project').forEach(el => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(50px)';
+      el.style.transition = 'all 0.6s ease-out';
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>
