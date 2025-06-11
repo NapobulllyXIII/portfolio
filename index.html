@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Il Mio Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --card-bg: #fff;
+      --link-color: #0066cc;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --card-bg: #1e1e1e;
+      --link-color: #4ea0f5;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: #282c34;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .toggle-dark {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .toggle-dark:hover {
+      background: #666;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .project {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-3px);
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .project-description {
+      margin: 0.5rem 0 1rem;
+      line-height: 1.5;
+    }
+
+    .project a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .project a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 1.5rem 1rem;
+      }
+
+      .project {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Il Mio Portfolio</h1>
+    <p>Benvenuto! Qui trovi tutti i miei progetti web.</p>
+    <button class="toggle-dark" onclick="toggleDarkMode()">🌓 Tema</button>
+  </header>
+
+  <div class="container">
+    <div class="project">
+      <h2 class="project-title">Progetto 1: ToDo App</h2>
+      <p class="project-description">Una semplice app per gestire le attività quotidiane, costruita con HTML, CSS e JavaScript.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Visita il sito</a>
+    </div>
+
+    <div class="project">
+      <h2 class="project-title">Progetto 2: Portfolio Fotografico</h2>
+      <p class="project-description">Galleria fotografica responsive con layout grid.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-ratings/" target="_blank">Visita il sito</a>
+    </div>
+
+    <div class="project">
+      <h2 class="project-title">Progetto 3: Gioco Snake</h2>
+      <p class="project-description">Il classico gioco Snake ricreato in JavaScript.</p>
+      <a href="https://napobulllyxiii.github.io/napobullly-space" target="_blank">Gioca ora</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Il Mio Portfolio – AN
+  </footer>
+
+  <script>
+    // Dark mode toggle con salvataggio preferenza
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+
+    // Applica il tema salvato all’avvio
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+  </script>
+</body>
+</html>
